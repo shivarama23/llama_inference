@@ -24,3 +24,17 @@ def remove_overlapping_entities(entities):
 entities = [(0, 10), (5, 15), (16, 20), (18, 25)]
 non_overlapping_entities = remove_overlapping_entities(entities)
 print(non_overlapping_entities)
+
+
+def get_redacted_text(text_patches):
+    redacted_text = ''
+    for patch_tuple in text_patches:
+        text = patch_tuple[0]
+        text_label = patch_tuple[1]
+        if text_label != '':
+            temp_text = text+'['+text_label+']'
+        else:
+            temp_text = text
+        redacted_text += temp_text
+
+    return redacted_text
