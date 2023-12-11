@@ -26,6 +26,24 @@ non_overlapping_entities = remove_overlapping_entities(entities)
 print(non_overlapping_entities)
 
 
+
+        paragraph = text.text
+        modified_text = paragraph
+
+        offset = 0
+
+        text_patches = []
+        if len(tags.find_all()) > 0:
+            for i in tags.find_all():
+                tag = i.get('TYPE')
+                start = int(i.get('start'))
+                end = int(i.get('end'))
+                text_patch = (modified_text[offset: start], tag)
+                text_patches.append(text_patch)
+                offset = end
+
+        text_patches.append((modified_text[offset:], ''))
+
 def get_redacted_text(text_patches):
     redacted_text = ''
     for patch_tuple in text_patches:
